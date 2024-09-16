@@ -1,0 +1,19 @@
+const API_KEY = 'ad7df682-aa28-4383-900e-9f96e0bea366';  // Your API Key
+
+function trackPortfolio() {
+    let cryptoName = document.getElementById('cryptoName').value;
+    let amount = document.getElementById('cryptoAmount').value;
+
+    // Use your API endpoint here
+    fetch(`https://api.yourcryptoservice.com/v1/cryptocurrency/price?api_key=${API_KEY}&symbol=${cryptoName}`)
+        .then(response => response.json())
+        .then(data => {
+            let price = data.price;
+            let value = price * amount;
+            document.getElementById('portfolioResult').innerText = `Portfolio Value: $${value.toFixed(2)}`;
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('portfolioResult').innerText = 'Error fetching data.';
+        });
+}
